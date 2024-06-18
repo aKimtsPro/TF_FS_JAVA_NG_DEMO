@@ -1,0 +1,6 @@
+@if( currentUser$ | async; as currentUser ){
+  <h1>Bonjour, {{currentUser.user.username}}!!</h1>
+}
+@else {
+  <h1>Bonjour!!</h1>
+}

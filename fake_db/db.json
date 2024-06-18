@@ -1,0 +1,62 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "akimts",
+      "email": "akimts@mail.com",
+      "password": "$2a$12$PIlCfua9w8BWCxRC.eXz.uF8zV795qfABUdDvZtybHcreY63XVDjC"
+    }
+  ],
+  "posts": [
+    {
+      "id": 1,
+      "title": "Exploration of the Cosmos",
+      "message": "Discover the wonders of the universe and the secrets it holds."
+    },
+    {
+      "id": 2,
+      "title": "Healthy Eating Tips",
+      "message": "Learn how to maintain a balanced diet with these simple tips."
+    },
+    {
+      "id": 3,
+      "title": "The Art of Mindfulness",
+      "message": "Improve your mental health by practicing mindfulness daily."
+    },
+    {
+      "id": 4,
+      "title": "Innovative Tech Trends",
+      "message": "Stay ahead of the curve with the latest in technology innovations."
+    },
+    {
+      "id": 5,
+      "title": "Travel Destinations 2024",
+      "message": "Explore the top travel destinations for the upcoming year"
+    },
+    {
+      "id": 6,
+      "title": "DIY Home Projects",
+      "message": "Transform your home with these easy and affordable DIY projects."
+    },
+    {
+      "id": 7,
+      "title": "Financial Planning 101",
+      "message": "Get started on your financial planning with these essential tips."
+    },
+    {
+      "id": 8,
+      "title": "Fitness Routines for Beginners",
+      "message": "Kickstart your fitness journey with these beginner-friendly routines."
+    },
+    {
+      "id": 9,
+      "title": "Sustainable Living Practices",
+      "message": "Adopt sustainable practices to reduce your environmental footprint."
+    },
+    {
+      "id": 10,
+      "title": "Culinary Adventures",
+      "message": "Explore new cuisines and enhance your cooking skills with these recipes."
+    }
+  ]
+}

@@ -1,6 +1,11 @@
 import {Validators} from "@angular/forms";
 
+export interface ILoginForm {
+  email: string;
+  password: string;
+}
+
 export const LOGIN_FORM = {
-  'username': [ '', [Validators.required] ],
+  'email': [ '', [Validators.required] ],
   'password': [ '', [Validators.required] ]
 }

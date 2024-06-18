@@ -1,0 +1,19 @@
+<h2>Detail du Post</h2>
+
+@if (post$ | async; as post){
+
+  <div>
+    <p>
+      <span>id:</span>
+      <span>{{post.id}}</span>
+    </p>
+    <p>
+      <span>title:</span>
+      <span>{{post.title}}</span>
+    </p>
+    <p>
+      <span>message:</span>
+      <span>{{post.message}}</span>
+    </p>
+  </div>
+}
