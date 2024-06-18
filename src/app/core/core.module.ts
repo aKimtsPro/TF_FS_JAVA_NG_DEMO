@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {ErrorHandler, NgModule} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {AuthModule} from "../features/auth/auth.module";
 import { CoreComponent } from './container/core.component';
@@ -10,6 +10,10 @@ import {ToastModule} from "primeng/toast";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ButtonDirective} from "primeng/button";
 import { FooterComponent } from './layout/footer/footer.component';
+import {TranslateModule} from "@ngx-translate/core";
+import {DropdownModule} from "primeng/dropdown";
+import {FormsModule} from "@angular/forms";
+import {GlobalErrorHandler} from "../handlers/global-error.handler";
 
 
 
@@ -26,7 +30,16 @@ import { FooterComponent } from './layout/footer/footer.component';
     CoreRoutingModule,
     AuthModule,
     ToastModule,
-    ButtonDirective
+    ButtonDirective,
+    TranslateModule,
+    DropdownModule,
+    FormsModule
+  ],
+  providers: [
+    //     {
+    //   provide: ErrorHandler,
+    //   useClass: GlobalErrorHandler
+    // }
   ]
 })
 export class CoreModule { }

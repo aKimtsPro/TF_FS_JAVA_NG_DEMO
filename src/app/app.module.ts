@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {ErrorHandler, LOCALE_ID, NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -7,9 +7,17 @@ import {CoreModule} from "./core/core.module";
 import {MessagesModule} from "primeng/messages";
 import {MessageService} from "primeng/api";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {HTTP_INTERCEPTORS, provideHttpClient, withInterceptors} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClient, provideHttpClient, withInterceptors} from "@angular/common/http";
 import {AuthService} from "./shared/services/auth.service";
 import {jwtInterceptor} from "./shared/interceptors/jwt.interceptor";
+import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
+import {TranslateHttpLoader} from "@ngx-translate/http-loader";
+import {GlobalErrorHandler} from "./handlers/global-error.handler";
+import {ToastModule} from "primeng/toast";
+
+function httpTranslationLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, "/assets/i18n/", ".json");
+}
 
 @NgModule({
   declarations: [
@@ -20,6 +28,14 @@ import {jwtInterceptor} from "./shared/interceptors/jwt.interceptor";
     AppRoutingModule,
     CoreModule,
     BrowserAnimationsModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (http: HttpClient) => httpTranslationLoader(http),
+        deps: [HttpClient]
+      }
+    }),
+    ToastModule
   ],
   providers: [
     MessageService,
@@ -28,7 +44,11 @@ import {jwtInterceptor} from "./shared/interceptors/jwt.interceptor";
         jwtInterceptor
       ])
     ),
-    AuthService
+    AuthService,
+    {
+      provide: ErrorHandler,
+      useClass: GlobalErrorHandler
+    }
   ],
   bootstrap: [AppComponent]
 })

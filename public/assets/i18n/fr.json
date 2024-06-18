@@ -1,0 +1,15 @@
+{
+  "hello": "Bonjour",
+  "error" : {
+    "http": {
+      "404" : {
+        "message": "non trouvé",
+        "detail": "la ressource voulue n'a pas été trouvée"
+      },
+      "no-connection": {
+        "message": "pas de connexion",
+        "detail": "la connexion au serveur a échoué"
+      }
+    }
+  }
+}

@@ -1,7 +1,8 @@
-import {HttpHeaders, HttpInterceptorFn} from "@angular/common/http";
+import {HttpErrorResponse, HttpHeaders, HttpInterceptorFn} from "@angular/common/http";
 import {inject} from "@angular/core";
 import {AuthService} from "../services/auth.service";
-import {tap} from "rxjs";
+import {catchError, tap, throwError} from "rxjs";
+import {GenericError} from "../../handlers/errors/generic.error";
 
 
 export const jwtInterceptor: HttpInterceptorFn = (req, next)  => {
@@ -17,6 +18,11 @@ export const jwtInterceptor: HttpInterceptorFn = (req, next)  => {
   }
 
   return next(req).pipe(
-    tap(resp => console.log(resp))
+    tap(resp => console.log(resp)),
+    catchError(
+      err => {
+        throw 'elo'
+      }
+    )
   )
 }

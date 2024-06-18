@@ -1,6 +1,8 @@
 @if( currentUser$ | async; as currentUser ){
-  <h1>Bonjour, {{currentUser.user.username}}!!</h1>
+  <h1> {{ 'error.http.404.message' | translate }}, {{currentUser.user.username}}!!</h1>
 }
 @else {
-  <h1>Bonjour!!</h1>
+  <h1> {{ 'hello' | translate }}!!</h1>
 }
+
+<button (click)="throwException()">throw</button>

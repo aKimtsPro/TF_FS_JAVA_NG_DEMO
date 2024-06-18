@@ -2,17 +2,22 @@
   <p-menubar [model]="menuItems()">
 
     <ng-template pTemplate="end">
-      @if (isConnected()){
-        <div>
-          <button pButton (click)="handleLogout()" severity="danger">logout</button>
-        </div>
-      } @else {
-        <div>
-          <button pButton severity="success" routerLink="/auth/login">login</button>
-        </div>
-      }
-
+      <div class="flex">
+        <p-dropdown [options]="dropdownOptions"
+                    [(ngModel)]="selectedOption"
+        ></p-dropdown>
+        @if (isConnected()){
+          <div>
+            <button pButton (click)="handleLogout()" severity="danger">logout</button>
+          </div>
+        } @else {
+          <div>
+            <button pButton severity="success" routerLink="/auth/login">login</button>
+          </div>
+        }
+      </div>
     </ng-template>
+
 
   </p-menubar>
 </header>
