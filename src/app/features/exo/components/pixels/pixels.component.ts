@@ -24,8 +24,9 @@ export class PixelsComponent {
 
   handleColorPixel(x: number, y: number) {
     this.pixels.update(v => {
-      v[x][y] = this.selectedColor()
-      return v
+      const copy = [ ...this.pixels().map(e => [...e]) ]
+      copy[x][y] = this.selectedColor()
+      return copy
     })
   }
 
