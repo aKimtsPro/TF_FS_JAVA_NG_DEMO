@@ -18,7 +18,7 @@ export class GlobalErrorHandler implements ErrorHandler {
 
   handleError(error: any): void {
     if( error instanceof ResourceNotFoundError ){
-      this.handleGenericError(error);
+      this.handleResourceNotFound(error)
     }
     else if( error instanceof GenericError ){
       this.handleGenericError(error)
@@ -26,6 +26,11 @@ export class GlobalErrorHandler implements ErrorHandler {
     else {
       this.handleUnexpected(error)
     }
+  }
+
+  handleResourceNotFound(error: ResourceNotFoundError): void {
+    this.handleGenericError(error);
+    this.$router.navigate(['posts']);
   }
 
   handleGenericError(error: GenericError): void {
