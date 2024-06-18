@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import {Component, computed, inject} from '@angular/core';
 import {MenuItem} from "primeng/api";
 import {AuthService} from "../../../shared/services/auth.service";
 import {Observable} from "rxjs";
+import {toSignal} from "@angular/core/rxjs-interop";
 
 @Component({
   selector: 'app-header',
@@ -10,48 +11,60 @@ import {Observable} from "rxjs";
 })
 export class HeaderComponent {
 
-  menuItems: MenuItem[] = [
-    {
-      label: 'home',
-      routerLink: '/home'
-    },
-    {
-      label: 'auth',
-      items: [
-        {
-          label: 'login',
-          routerLink: '/auth/login'
-        },
-        {
-          label: 'mon profil',
-          routerLink: '/auth/profile'
-        }
-      ]
-    },
-    {
-      label: 'posts',
-      items: [
-        {
-          label: 'list',
-          routerLink: '/posts'
-        },
-        {
-          label: 'create',
-          routerLink: '/posts/create'
-        }
-      ]
-    }
-  ]
-  isConnected$: Observable<boolean>
+  private readonly $auth = inject(AuthService)
 
-  constructor(
-    private readonly _auth: AuthService
-  ) {
-    this.isConnected$ = _auth.isConnected$;
-  }
+  isConnected = toSignal(this.$auth.isConnected$)
+
+  menuItems = computed(() => {
+    const isConnected = this.isConnected();
+    return [
+      {
+        label: 'home',
+        routerLink: '/home'
+      },
+      {
+        label: 'auth',
+        items: [
+          {
+            label: 'login',
+            routerLink: '/auth/login',
+            visible: !isConnected
+          },
+          {
+            label: 'mon profil',
+            routerLink: '/auth/profile',
+            visible: isConnected
+          }
+        ]
+      },
+      {
+        label: 'posts',
+        items: [
+          {
+            label: 'list',
+            routerLink: '/posts'
+          },
+          {
+            label: 'create',
+            routerLink: '/posts/create'
+          }
+        ],
+        visible: isConnected
+      },
+      {
+        label: 'exo',
+        items: [
+          {
+            label: 'pixels',
+            routerLink: '/exo/pixels'
+          }
+        ]
+      }
+    ]
+  })
 
   handleLogout(): void {
-    this._auth.logout()
+    this.$auth.logout()
   }
 
 }

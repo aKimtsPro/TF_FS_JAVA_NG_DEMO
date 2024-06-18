@@ -1,1 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+  --primary: #643b53;
+  --primary-light: #a18796;
+  --primary-dark: #4D243D;
+  --secondary: #D0A98F;
+  --secondary-light: #eadcd3;
+  --secondary-dark: #ad7956;
+}
+
+body {
+  margin: 0;
+  padding-bottom: 60px;
+  min-height: 100vh;
+  position: relative;
+  background-color: var(--secondary-light);
+}
+
+

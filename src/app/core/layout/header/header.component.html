@@ -1,14 +1,14 @@
 <header>
-  <p-menubar [model]="menuItems">
+  <p-menubar [model]="menuItems()">
 
     <ng-template pTemplate="end">
-      @if (isConnected$ | async){
+      @if (isConnected()){
         <div>
-          <button pButton (click)="handleLogout()">logout</button>
+          <button pButton (click)="handleLogout()" severity="danger">logout</button>
         </div>
       } @else {
         <div>
-
+          <button pButton severity="success" routerLink="/auth/login">login</button>
         </div>
       }
 

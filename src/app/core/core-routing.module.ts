@@ -21,6 +21,10 @@ const routes: Routes = [
         path: 'posts',
         loadChildren: () => import('../features/posts/posts.module').then(m => m.PostsModule),
         canActivate: [authGuard(true)]
+      },
+      {
+        path: 'exo',
+        loadChildren: () => import('../features/exo/exo.module').then(m => m.ExoModule),
       }
     ]
   }

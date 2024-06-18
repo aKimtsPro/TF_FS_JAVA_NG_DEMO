@@ -10,7 +10,6 @@ export class PostsService {
 
   constructor(
     private readonly _client: HttpClient,
-    private readonly _auth: AuthService,
   ) { }
 
   getPosts(): Observable<IPost[]> {

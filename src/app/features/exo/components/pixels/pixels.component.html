@@ -1,0 +1,32 @@
+<div class="m-4 flex justify-content-center">
+
+  <div>
+    <div class="flex mb-4">
+      <div class="square red"
+           (click)="handleChangeColor('red')"
+      ></div>
+      <div class="square green"
+           (click)="handleChangeColor('green')"
+      ></div>
+      <div class="square blue"
+           (click)="handleChangeColor('blue')"
+      ></div>
+    </div>
+
+
+    <div>
+      @for( line of  pixels(); track y; let y = $index){
+        <div class="flex">
+          @for ( pixel of line; track x; let x = $index) {
+            <div class="square"
+                 (click)="handleColorPixel(x,y)"
+                 [ngClass]="pixels()[x][y]"
+            ></div>
+          }
+        </div>
+      }
+    </div>
+  </div>
+
+
+</div>

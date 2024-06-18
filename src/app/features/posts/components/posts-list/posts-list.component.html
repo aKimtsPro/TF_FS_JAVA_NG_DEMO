@@ -5,7 +5,11 @@
 <button pButton (click)="addExclamation.set(!addExclamation())">toggle exclamation</button>
 
 @if( loading() ){
-  <p-progressSpinner ariaLabel="loading"></p-progressSpinner>
+  <div class="flex m-6 justify-content-center">
+    <div>
+      <p-progressSpinner ariaLabel="loading"></p-progressSpinner>
+    </div>
+  </div>
 }
 @else {
   <div>

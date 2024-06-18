@@ -1,5 +1,5 @@
-import {Component, computed, effect, inject, Signal, signal} from '@angular/core';
-import {delay, Observable} from "rxjs";
+import {Component, computed, effect, inject, signal} from '@angular/core';
+import {delay} from "rxjs";
 import {IPost} from "../../models/post.model";
 import {PostsService} from "../../services/posts.service";
 import {CookieService} from "ngx-cookie-service";
@@ -12,10 +12,10 @@ import {toSignal} from "@angular/core/rxjs-interop";
 })
 export class PostsListComponent {
 
-  private readonly $cookies = inject( CookieService)
-  private readonly $posts = inject(PostsService)
+  private readonly $cookies = inject( CookieService )
+  private readonly $posts = inject( PostsService )
 
-  posts: Signal<IPost[] | undefined> = toSignal( this.$posts.getPosts().pipe(delay(2000)) )
+  posts = toSignal( this.$posts.getPosts().pipe(delay(2000)) )
   favori= signal<IPost | null>(null)
   addExclamation = signal<boolean>(false)
 
@@ -39,7 +39,5 @@ export class PostsListComponent {
   changeFavori(post: IPost){
     this.favori.set(post)
   }
-
-
 
 }

@@ -9,6 +9,7 @@ import { HomeComponent } from './layout/home/home.component';
 import {ToastModule} from "primeng/toast";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ButtonDirective} from "primeng/button";
+import { FooterComponent } from './layout/footer/footer.component';
 
 
 
@@ -16,7 +17,8 @@ import {ButtonDirective} from "primeng/button";
   declarations: [
     CoreComponent,
     HeaderComponent,
-    HomeComponent
+    HomeComponent,
+    FooterComponent
   ],
   imports: [
     CommonModule,
