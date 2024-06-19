@@ -16,6 +16,10 @@ export class ExoComponent {
     {
       label: 'team',
       routerLink: './team'
+    },
+    {
+      label: 'tasks',
+      routerLink: './tasks'
     }
   ]
 

@@ -1,0 +1,33 @@
+<p-table [value]="tasks()">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>id</th>
+      <th>title</th>
+      <th>description</th>
+      <th>priority</th>
+      <th>status</th>
+      <th>deadline</th>
+      <th>actions</th>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="body" let-task>
+    <tr>
+      <td>{{task.id}}</td>
+      <td>{{task.title}}</td>
+      <td>{{task.description}}</td>
+      <td>{{task.priority}}</td>
+      <td>{{task.status}}</td>
+      <td>{{task.deadline}}</td>
+      <td>
+        @if (task.status == 'TODO'){
+          <button pButton severity="success"
+                  (click)="handleCompleteTask(task)"
+          >
+            -> DONE
+          </button>
+        }
+      </td>
+    </tr>
+  </ng-template>
+</p-table>

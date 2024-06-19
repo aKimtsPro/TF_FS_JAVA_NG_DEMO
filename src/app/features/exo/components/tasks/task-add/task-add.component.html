@@ -1,0 +1,61 @@
+<div class="border-1 border-round p-2">
+  <div class="mb-4">
+    <h3>Ajouter une tâche</h3>
+  </div>
+  <div>
+    <form [formGroup]="form" (ngSubmit)="handleAddTask()">
+      <div class="mb-4">
+        <p-floatLabel>
+          <input type="text" pInputText id="in-id" formControlName="id">
+          <label for="in-id">id</label>
+        </p-floatLabel>
+
+      </div>
+
+      <div class="mb-4">
+        <p-floatLabel>
+          <input type="text" pInputText id="in-title" formControlName="title">
+          <label for="in-title">title</label>
+        </p-floatLabel>
+
+      </div>
+
+      <div class="mb-4">
+        <p-floatLabel>
+          <input type="text" pInputText id="in-desc" formControlName="description">
+          <label for="in-desc">description</label>
+        </p-floatLabel>
+
+      </div>
+
+
+      <div class="mb-4">
+        <p-floatLabel>
+          <input type="text" pInputText id="in-priority" formControlName="priority">
+          <label for="in-priority">priority</label>
+        </p-floatLabel>
+
+      </div>
+
+      <div class="mb-4">
+        <p-floatLabel>
+          <input type="text" pInputText id="in-status" formControlName="status">
+          <label for="in-status">status</label>
+        </p-floatLabel>
+
+      </div>
+
+      <div class="mb-4">
+        <p-floatLabel>
+          <input type="text" pInputText id="in-deadline" formControlName="deadline">
+          <label for="in-deadline">deadline</label>
+        </p-floatLabel>
+
+      </div>
+
+      <div>
+        <button pButton severity="success">ajouter</button>
+      </div>
+    </form>
+  </div>
+</div>

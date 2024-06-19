@@ -17,6 +17,11 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {StoreModule} from "@ngrx/store";
 import {FEATURE_TEAM} from "./store/team/team.state";
 import {teamReducer} from "./store/team/team.reducer";
+import {FEATURE_TASKS} from "./store/tasks/tasks.state";
+import {tasksReducer} from "./store/tasks/tasks.reducer";
+import { TasksComponent } from './components/tasks/tasks.component';
+import { TasksListComponent } from './components/tasks/tasks-list/tasks-list.component';
+import { TaskAddComponent } from './components/tasks/task-add/task-add.component';
 
 
 
@@ -26,7 +31,10 @@ import {teamReducer} from "./store/team/team.reducer";
     ExoComponent,
     TeamComponent,
     TeamListPlayersComponent,
-    TeamAddPlayerComponent
+    TeamAddPlayerComponent,
+    TasksComponent,
+    TasksListComponent,
+    TaskAddComponent
   ],
   imports: [
     CommonModule,
@@ -38,7 +46,8 @@ import {teamReducer} from "./store/team/team.reducer";
     FloatLabelModule,
     ChipsModule,
     ReactiveFormsModule,
-    StoreModule.forFeature(FEATURE_TEAM, teamReducer)
+    StoreModule.forFeature(FEATURE_TEAM, teamReducer),
+    StoreModule.forFeature(FEATURE_TASKS, tasksReducer),
   ],
   providers: [
     TeamService
