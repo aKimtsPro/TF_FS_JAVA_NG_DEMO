@@ -1,102 +1,72 @@
 import { Injectable } from '@angular/core';
-import {IPlayer, ITeam} from "../models/team.model";
-import {BehaviorSubject, map} from "rxjs";
+import {IPlayer} from "../models/team.model";
+import { combineLatest, first } from "rxjs";
 import {PlayerNotFoundError} from "../errors/player-not-found.error";
 import {LeaderDeleteError} from "../errors/leader-delete.error";
 import {GenericError} from "../../../handlers/errors/generic.error";
 import {TeamFullError} from "../errors/team-full.error";
 import {Store} from "@ngrx/store";
 import {TeamActions} from "../store/team/team.action";
+import {
+  selectTeam,
+  selectTeamLeader,
+  selectTeamPlayer, selectTeamPlayers,
+} from "../store/team/team.selector";
 
 @Injectable()
 export class TeamService {
 
   private _nextId = 1;
 
-
-  private readonly _team$ = new BehaviorSubject<ITeam>({
-    players: [],
-    leader: null
-  });
-
   constructor(
     private readonly $store: Store
   ) { }
 
   addPlayer(player: IPlayer) {
-    if( this.team.players.includes(player) )
-      throw new GenericError('player-exists', 'error')
+    this.$store.select(selectTeamPlayers).pipe(
+      first()
+    ).subscribe(players => {
+      if( players.includes(player) )
+        throw new GenericError('player-exists', 'error')
 
-    if( this.team.players.length == 5 )
-      throw new TeamFullError();
+      if( players.length == 5 )
+        throw new TeamFullError();
 
-    player.id = this._nextId++;
-    // this.team.players.push(player);
+      player.id = this._nextId++;
 
-    this.$store.dispatch( TeamActions.addPlayer({ player }) )
-
-    this._team$.next( this.team )
+      this.$store.dispatch( TeamActions.addPlayer({ player }) )
+    })
   }
 
   removePlayer(id: number) {
-    const toRemoveIndex = this.team.players.findIndex(
-      player => player.id == id
-    )
+    combineLatest([
+      this.$store.select(selectTeamPlayer(id)).pipe(first()),
+      this.$store.select(selectTeamLeader).pipe(first()),
+    ]).subscribe(([player, leader]) => {
+      if( !player )
+        throw new PlayerNotFoundError()
 
-    if( toRemoveIndex === -1 )
-      throw new PlayerNotFoundError();
+      if( player === leader )
+        throw new LeaderDeleteError();
 
-    const toRemove = this.team.players[toRemoveIndex]
-    if( toRemove === this.team.leader )
-      throw new LeaderDeleteError();
-
-    // this.team.players.splice(toRemoveIndex, 1)
-    this.$store.dispatch( TeamActions.removePlayer({playerId: toRemoveIndex}) )
-
-    this._team$.next( this.team )
+      this.$store.dispatch( TeamActions.removePlayer({playerId: player.id!}) )
+    })
   }
 
   setLeader(id: number){
-    const nextLeader = this.team.players.find(
-      player => player.id == id
-    )
+    combineLatest([
+      this.$store.select(selectTeamPlayer(id)).pipe(first()),
+      this.$store.select(selectTeamLeader).pipe(first()),
+    ]).subscribe(
+      ([nextLeader, leader]) => {
+        if( !nextLeader )
+          throw new PlayerNotFoundError();
 
-    if( !nextLeader )
-      throw new PlayerNotFoundError();
+        if( nextLeader === leader )
+          throw new GenericError('already-leader', 'error');
 
-    if( nextLeader === this.team.leader )
-      throw new GenericError('already-leader', 'error');
-
-    this.team.leader = nextLeader
-    this._team$.next( this.team )
-  }
-
-  get team() {
-    return this._team$.value
-  }
-
-  get leader() {
-    return this.team.leader;
-  }
-
-  get players() {
-    return [...this.team.players];
-  }
-
-  get team$() {
-    return this._team$.asObservable()
-  }
-
-  get leader$() {
-    return this._team$.pipe(
-      map(t => t.leader)
+        this.$store.dispatch( TeamActions.setLeader({nextLeader}) )
+      }
     )
   }
-
-  get players$() {
-    return this._team$.pipe(
-      map(t => t.players),
-    )
-  }
-
 }

@@ -1,9 +1,7 @@
 import {Component, inject} from '@angular/core';
-import {IPlayer} from "../../../models/team.model";
 import {TeamService} from "../../../services/team.service";
-import {toSignal} from "@angular/core/rxjs-interop";
 import {Store} from "@ngrx/store";
-import {selectTeamPlayers} from "../../../store/team/team.selector";
+import {selectTeamIsLeader, selectTeamPlayers} from "../../../store/team/team.selector";
 
 @Component({
   selector: 'app-team-list-players',
@@ -22,7 +20,7 @@ export class TeamListPlayersComponent {
   }
 
   isLeader(id: number) {
-    return this.$team.leader?.id == id
+    return this.$store.select(selectTeamIsLeader(id))
   }
 
   handleSetLeader(id: number) {

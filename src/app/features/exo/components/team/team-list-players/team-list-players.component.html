@@ -9,7 +9,7 @@
   </ng-template>
 
   <ng-template pTemplate="body" let-player>
-    <tr [ngClass]="{'leader': isLeader(player.id)}">
+    <tr [ngClass]="{'leader': isLeader(player.id) | async}">
       <td>{{player.id}}</td>
       <td>{{player.firstname}}</td>
       <td>{{player.lastname}}</td>
