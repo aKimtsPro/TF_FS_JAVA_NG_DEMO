@@ -2,6 +2,8 @@ import {Component, inject} from '@angular/core';
 import {IPlayer} from "../../../models/team.model";
 import {TeamService} from "../../../services/team.service";
 import {toSignal} from "@angular/core/rxjs-interop";
+import {Store} from "@ngrx/store";
+import {selectTeamPlayers} from "../../../store/team/team.selector";
 
 @Component({
   selector: 'app-team-list-players',
@@ -10,18 +12,20 @@ import {toSignal} from "@angular/core/rxjs-interop";
 })
 export class TeamListPlayersComponent {
 
-  private readonly teamService = inject(TeamService);
-  players = toSignal(this.teamService.players$, {initialValue: [] as IPlayer[]})
+  private readonly $team = inject(TeamService);
+  private readonly $store = inject(Store);
+
+  players = this.$store.selectSignal(selectTeamPlayers)
 
   handleDeletePlayer(id: number) {
-    this.teamService.removePlayer(id)
+    this.$team.removePlayer(id)
   }
 
   isLeader(id: number) {
-    return this.teamService.leader?.id == id
+    return this.$team.leader?.id == id
   }
 
   handleSetLeader(id: number) {
-    this.teamService.setLeader(id)
+    this.$team.setLeader(id)
   }
 }

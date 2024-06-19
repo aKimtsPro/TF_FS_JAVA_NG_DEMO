@@ -14,6 +14,9 @@ import {TranslateModule} from "@ngx-translate/core";
 import {FloatLabelModule} from "primeng/floatlabel";
 import {ChipsModule} from "primeng/chips";
 import {ReactiveFormsModule} from "@angular/forms";
+import {StoreModule} from "@ngrx/store";
+import {FEATURE_TEAM} from "./store/team/team.state";
+import {teamReducer} from "./store/team/team.reducer";
 
 
 
@@ -34,7 +37,8 @@ import {ReactiveFormsModule} from "@angular/forms";
     TranslateModule,
     FloatLabelModule,
     ChipsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    StoreModule.forFeature(FEATURE_TEAM, teamReducer)
   ],
   providers: [
     TeamService

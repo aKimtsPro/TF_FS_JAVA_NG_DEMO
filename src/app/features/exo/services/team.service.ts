@@ -5,6 +5,8 @@ import {PlayerNotFoundError} from "../errors/player-not-found.error";
 import {LeaderDeleteError} from "../errors/leader-delete.error";
 import {GenericError} from "../../../handlers/errors/generic.error";
 import {TeamFullError} from "../errors/team-full.error";
+import {Store} from "@ngrx/store";
+import {TeamActions} from "../store/team/team.action";
 
 @Injectable()
 export class TeamService {
@@ -17,7 +19,9 @@ export class TeamService {
     leader: null
   });
 
-  constructor() { }
+  constructor(
+    private readonly $store: Store
+  ) { }
 
   addPlayer(player: IPlayer) {
     if( this.team.players.includes(player) )
@@ -27,7 +31,9 @@ export class TeamService {
       throw new TeamFullError();
 
     player.id = this._nextId++;
-    this.team.players.push(player);
+    // this.team.players.push(player);
+
+    this.$store.dispatch( TeamActions.addPlayer({ player }) )
 
     this._team$.next( this.team )
   }
@@ -44,7 +50,9 @@ export class TeamService {
     if( toRemove === this.team.leader )
       throw new LeaderDeleteError();
 
-    this.team.players.splice(toRemoveIndex, 1)
+    // this.team.players.splice(toRemoveIndex, 1)
+    this.$store.dispatch( TeamActions.removePlayer({playerId: toRemoveIndex}) )
+
     this._team$.next( this.team )
   }
 

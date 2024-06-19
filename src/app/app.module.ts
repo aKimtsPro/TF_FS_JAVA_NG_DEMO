@@ -14,6 +14,8 @@ import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {GlobalErrorHandler} from "./handlers/global-error.handler";
 import {ToastModule} from "primeng/toast";
+import {StoreModule} from "@ngrx/store";
+import {StoreDevtoolsModule} from "@ngrx/store-devtools";
 
 function httpTranslationLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, "/assets/i18n/", ".json");
@@ -35,7 +37,9 @@ function httpTranslationLoader(http: HttpClient) {
         deps: [HttpClient]
       }
     }),
-    ToastModule
+    ToastModule,
+    StoreModule.forRoot({}),
+    StoreDevtoolsModule.instrument()
   ],
   providers: [
     MessageService,
