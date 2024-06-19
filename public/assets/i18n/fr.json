@@ -1,5 +1,13 @@
 {
   "hello": "Bonjour",
+  "table": {
+    "firstname": "prenom",
+    "lastname": "nom",
+    "actions": {
+      "colName": "actions",
+      "delete": "supprimer"
+    }
+  },
   "error" : {
     "http": {
       "404" : {

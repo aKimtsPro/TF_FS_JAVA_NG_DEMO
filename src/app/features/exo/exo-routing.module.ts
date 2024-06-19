@@ -3,6 +3,7 @@ import {NgModule} from "@angular/core";
 import {HomeComponent} from "../../core/layout/home/home.component";
 import {ExoComponent} from "./container/exo.component";
 import {PixelsComponent} from "./components/pixels/pixels.component";
+import {TeamComponent} from "./components/team/team.component";
 
 const routes: Routes = [
   {
@@ -12,6 +13,10 @@ const routes: Routes = [
       {
         path: 'pixels',
         component: PixelsComponent
+      },
+      {
+        path: 'team',
+        component: TeamComponent
       }
     ]
   }

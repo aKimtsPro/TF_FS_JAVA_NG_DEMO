@@ -59,9 +59,13 @@ export class HeaderComponent {
           {
             label: 'pixels',
             routerLink: '/exo/pixels'
+          },
+          {
+            label: 'team',
+            routerLink: '/exo/team'
           }
         ]
-      }
+      },
     ]
   })
 

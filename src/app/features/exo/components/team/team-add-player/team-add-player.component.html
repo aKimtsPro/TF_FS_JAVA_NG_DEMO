@@ -1,0 +1,27 @@
+<div class="border-1 border-round p-2">
+  <div class="mb-4">
+    <h3>Ajouter un joueur</h3>
+  </div>
+  <div>
+    <form [formGroup]="form" (ngSubmit)="handleAddPlayer()">
+      <div class="mb-4">
+        <p-floatLabel>
+          <input type="text" pInputText id="in-firstname" formControlName="firstname">
+          <label for="in-firstname">firstname</label>
+        </p-floatLabel>
+
+      </div>
+
+      <div class="mb-4">
+        <p-floatLabel>
+          <input type="text" pInputText id="in-lastname" formControlName="lastname">
+          <label for="in-lastname">lastname</label>
+        </p-floatLabel>
+      </div>
+
+      <div>
+        <button pButton severity="success">ajouter</button>
+      </div>
+    </form>
+  </div>
+</div>
